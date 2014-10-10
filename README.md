@@ -40,3 +40,9 @@ If using [Duct](https://github.com/torann/asset-duct) add this to the CSS manife
 ## Documentation
 
 [View the official documentation](https://github.com/Torann/laravel-weather/wiki).
+
+## Example
+
+An live example can be seen on [Snowcrew.org](http://snowcrew.org)
+
+![Example.png](./docs/example.png)
