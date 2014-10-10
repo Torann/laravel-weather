@@ -8,8 +8,8 @@ Just a simple weather package for Laravel.
 
 ## Installation
 
-- [Laravel Repository on Packagist](https://packagist.org/packages/torann/laravel-repository)
-- [Laravel Repository on GitHub](https://github.com/torann/laravel-repository)
+- [Laravel Weather on Packagist](https://packagist.org/packages/torann/laravel-weather)
+- [Laravel Weather on GitHub](https://github.com/torann/laravel-weather)
 
 To get the latest version of Laravel Weather simply require it in your `composer.json` file.
 
