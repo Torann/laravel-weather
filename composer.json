@@ -1,0 +1,27 @@
+{
+    "name": "torann/laravel-weather",
+    "description": "Simple weather forecaster for Laravel",
+    "keywords": ["laravel", "weather", "forecast", "storms"],
+    "license": "BSD 2-Clause",
+    "authors": [
+        {
+            "name": "Daniel Stainback",
+            "email": "daniel@lyften.com"
+        }
+     ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~4.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Torann\\LaravelWeather": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    },
+    "minimum-stability": "stable"
+}
