@@ -41,24 +41,45 @@ class Weather
     }
 
     /**
-     * Render weather widget.
+     * Render weather widget by location name.
      *
-     * @param string $location
-     * @param array $options
+     * @param  string $name
      * @return string
      */
-    public function render($location = null, $options = array())
+    public function renderByName($name = null)
+    {
+        // Remove commas
+        $name = strtolower(str_replace(', ', ',', $name));
+
+        return $this->generate(array(
+            'query' => "q={$name}"
+        ));
+    }
+
+    /**
+     * Render weather widget by geo point.
+     *
+     * @param  float  $lat
+     * @param  float  $lon
+     * @return string
+     */
+    public function renderByPoint($lat, $lon)
+    {
+        return $this->generate(array(
+            'query' => "lat={$lat}&lon={$lon}"
+        ));
+    }
+
+    /**
+     * Render weather widget.
+     *
+     * @param  array  $options
+     * @return string
+     */
+    public function generate($options = array())
     {
         // Get options
         $options = array_merge($this->config['defaults'], $options);
-
-        // Get location
-        if($location) {
-            $options['query'] = 'q=' . urlencode($location);
-        }
-        else {
-            return 'Unable to determine your location.';
-        }
 
         // Create cache key
         $cacheKey = 'Weather.'.md5(implode($options));
@@ -75,13 +96,13 @@ class Weather
             return 'Unable to load weather';
         }
 
-        // Get forcast
-        $forcast = $this->getWeather($options['query'], $options['days'], $options['units']);
+        // Get forecast
+        $forecast = $this->getWeather($options['query'], $options['days'], $options['units']);
 
         // Render view
         $html = $this->view->make("{$this->config['views']}.{$options['style']}", array(
             'current'  => $current,
-            'forcast'  => $forcast,
+            'forcast'  => $forecast,
             'units'    => $options['units'],
             'date'     => $options['date']
         ))->render();
@@ -172,7 +193,7 @@ class Weather
         return $this->request("http://api.openweathermap.org/data/2.5/{$forecast}{$query}&cnt={$days}&units={$units}&mode=json&lang={$lang}");
     }
 
-    private function request( $url )
+    private function request($url)
     {
         $ch = curl_init($url);
 

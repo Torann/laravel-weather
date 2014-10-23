@@ -37,9 +37,19 @@ If using [Duct](https://github.com/torann/asset-duct) add this to the CSS manife
  *= require torann/laravel-weather/weather.css
 ```
 
-## Documentation
+## Rendering
 
-[View the official documentation](https://github.com/Torann/laravel-weather/wiki).
+Rendering weather by point:
+
+```
+Weather::renderByPoint($lat, $lng)
+```
+
+Rendering weather by city name:
+
+```
+Weather::renderByName('Hamden, CT')
+```
 
 ## Example
 
