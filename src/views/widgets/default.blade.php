@@ -12,9 +12,9 @@
 
 	<h5>{{ $current['weather'][0]['description'] }}</h5>
 
-	@if($forcast['cnt'] > 1)
+	@if($forecast['cnt'] > 1)
 	<table width="100%">
-		@foreach($forcast['list'] as $key => $value)
+		@foreach($forecast['list'] as $key => $value)
 		<tr>
 			<td>{{ date($date, $value['dt']) }}</td>
 			<td><i data-icon="{{ Weather::getIcon($value['weather'][0]['id']) }}"></i></td>

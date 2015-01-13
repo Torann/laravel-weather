@@ -44,15 +44,17 @@ class Weather
      * Render weather widget by location name.
      *
      * @param  string $name
+     * @param  string $units
      * @return string
      */
-    public function renderByName($name = null)
+    public function renderByName($name = null, $units = null)
     {
         // Remove commas
         $name = strtolower(str_replace(', ', ',', $name));
 
         return $this->generate(array(
-            'query' => "q={$name}"
+            'query' => "q={$name}",
+            'units' => $units ?: $this->config['defaults']['units']
         ));
     }
 
@@ -61,12 +63,14 @@ class Weather
      *
      * @param  float  $lat
      * @param  float  $lon
+     * @param  string $units
      * @return string
      */
-    public function renderByPoint($lat, $lon)
+    public function renderByPoint($lat, $lon, $units = null)
     {
         return $this->generate(array(
-            'query' => "lat={$lat}&lon={$lon}"
+            'query' => "lat={$lat}&lon={$lon}",
+            'units' => $units ?: $this->config['defaults']['units']
         ));
     }
 
@@ -80,6 +84,12 @@ class Weather
     {
         // Get options
         $options = array_merge($this->config['defaults'], $options);
+
+        // Unify units
+        $options['units'] = strtolower($options['units']);
+        if (! in_array($options['units'], array('metric', 'imperial'))) {
+            $options['units'] = 'imperial';
+        }
 
         // Create cache key
         $cacheKey = 'Weather.'.md5(implode($options));
@@ -102,7 +112,7 @@ class Weather
         // Render view
         $html = $this->view->make("{$this->config['views']}.{$options['style']}", array(
             'current'  => $current,
-            'forcast'  => $forecast,
+            'forecast' => $forecast,
             'units'    => $options['units'],
             'date'     => $options['date']
         ))->render();
