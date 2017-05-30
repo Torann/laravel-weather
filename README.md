@@ -1,3 +1,5 @@
+> **NOTICE** This package no longer works as intended, the endpoint it uses no longer exists
+
 # Laravel Weather
 
 [![Latest Stable Version](https://poser.pugx.org/torann/laravel-weather/v/stable.png)](https://packagist.org/packages/torann/laravel-weather) [![Total Downloads](https://poser.pugx.org/torann/laravel-weather/downloads.png)](https://packagist.org/packages/torann/laravel-weather)
